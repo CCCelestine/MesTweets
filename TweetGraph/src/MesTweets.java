@@ -29,7 +29,7 @@ public class MesTweets {
     public static int afficher_menu() {
         Scanner scan = new Scanner(System.in);
         int nb;
-        System.out.print("Saisissez le numero 1 : ");
+        System.out.print("Saisissez un nombre (1 créer / 2 importer) : ");
 
         nb = scan.nextInt();
         System.out.println("Vous avez saisi le nombre : " + nb);
