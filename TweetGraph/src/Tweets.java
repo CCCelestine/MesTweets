@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Tweets {
+public class Tweets implements Serializable{
 
 	protected String id;
 	protected String idTwitto;
@@ -59,5 +59,18 @@ public class Tweets {
 		this.rtid = rtid;
 	}
 
+	public String toString() {
+        
+        /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        //LocalDateTime dateTime = LocalDateTime.of(1986, Month.APRIL, 8, 12, 30);
+        String formattedDateTime = getDate().format(formatter);*/
+        
+        String result =  "Id : " + getId() + "\n";
+        result +=  "Id Twitto : " + getIdTwitto() + "\n";
+        result +=  "date : " + getDate() + "\n";
+        result +=  "texte : " + getTexte() + "\n";
+        result +=  "rtid : " + getRtid() + "\n";
 
+        return result;	
+    }
 }
