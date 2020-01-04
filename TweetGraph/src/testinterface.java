@@ -3,6 +3,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -24,7 +25,7 @@ public class testinterface extends Application {
 			
 			//Nous allons utiliser nos fichier FXML dans ces deux méthodes
 			initialisationConteneurPrincipal();
-			initialisationContenu();
+			//initialisationContenu();
 		}
 
 		private void initialisationConteneurPrincipal() {
@@ -32,9 +33,12 @@ public class testinterface extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			//On lui spécifie le chemin relatif à notre classe
 			//du fichier FXML a charger : dans le sous-dossier view
+			
 			loader.setLocation(testinterface.class.getResource("/menu.fxml"));
+			
 			try {
 				//Le chargement nous donne notre conteneur
+	
 				conteneurPrincipal = (BorderPane) loader.load();
 				//On définit une scène principale avec notre conteneur
 				Scene scene = new Scene(conteneurPrincipal);
@@ -46,10 +50,10 @@ public class testinterface extends Application {
 				e.printStackTrace();
 			}
 		}
-		
+		/*
 		private void initialisationContenu() {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(testinterface.class.getResource("/Scene.fxml"));
+			loader.setLocation(testinterface.class.getResource("Scene.fxml"));
 			try {
 				//Nous récupérons notre conteneur qui contiendra les données
 				//Pour rappel, c'est un AnchorPane...
@@ -61,7 +65,7 @@ public class testinterface extends Application {
 				e.printStackTrace();
 			}
 		}
-		
+		*/
 
 	public static void main(String[] args) {
 		launch(args);

@@ -94,29 +94,54 @@ public class BaseDeTweets {
 		}
 		return s;
 	}
-	
+
 	public void toGraph(){
-    	Graph graph = new SingleGraph("Tutorial 1");
+		Graph graph = new SingleGraph("Tutorial 1");
 
-    	Iterator<Tweets> iter=collTweets.iterator();
-    	ArrayList<String> myNumbers = new ArrayList<String>();
-    	Boolean flag=true;
-        while(iter.hasNext())
-        {
-            Tweets n = iter.next();
-            String nom = n.getIdTwitto();
-            for (String i : myNumbers) {
-            	if(nom.compareTo(i)==0) {
-            		flag=false;
-            		break;
-            	}
-            }
-        	if(flag==true) {
-        		graph.addNode(nom);
-        		myNumbers.add(nom);
-        	}
-        }
+		Iterator<Tweets> iter=collTweets.iterator();
+		ArrayList<String> myNumbers = new ArrayList<String>();
 
+		int sommet=0;
+		while(iter.hasNext())
+		{
+			Boolean flag=true;
+			Boolean flag2=true;
+			Tweets n = iter.next();
+			String nom = n.getIdTwitto();
+			String nomRt = n.getRtid();
+			for (String i : myNumbers) {
+				if(nom.compareTo(i)==0) {
+					flag=false;
+					break;
+				}
+			}
+
+			if(flag==true) { //twitto
+				graph.addNode(nom);
+				myNumbers.add(nom);
+				sommet++;
+			}
+
+			for (String i : myNumbers) {
+				if(nomRt.compareTo(i)==0) { //on rajoute aussi celui qui rt
+					flag2=false;
+					break;
+				}
+			}
+			if (flag2==true ) { //twitto qui rt
+				graph.addNode(nomRt);
+
+				myNumbers.add(nomRt);
+				sommet++;
+				//graph.addEdge(nomRt+"-"+nom, nomRt, nom);
+			}
+			if (n.getRtid()!="") {
+				graph.addEdge(n.getId(), nomRt, nom);
+			}
+		}
+
+		//graph.addEdge("AB", "A", "B");
+		System.out.println("nombre de sommet "+sommet);
 		graph.display();
-    } 
+	} 
 }
