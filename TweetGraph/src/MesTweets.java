@@ -28,6 +28,9 @@ public class MesTweets {
                     afficher(baseDeTweets);
                     break;
                 case 3:
+                    afficherGraph(baseDeTweets);
+                    break;
+                case 4:
                     quitter();
                     break;
                 default:
@@ -39,7 +42,7 @@ public class MesTweets {
     public static int afficher_menu() {
         Scanner scan = new Scanner(System.in);
         int nb;
-        System.out.print("Saisissez un nombre (1 import/ 2 affichage / 3 quitter) : ");
+        System.out.print("Saisissez un nombre (1 import/ 2 affichage / 3 graph / 4 quitter) : ");
         nb = scan.nextInt();
         System.out.println("Vous avez saisi le nombre : " + nb);
         return nb;
@@ -58,7 +61,11 @@ public class MesTweets {
     public static void afficher(BaseDeTweets baseDeTweets) {
     	String res = baseDeTweets.toString();
     	System.out.println(res);
-    }    
+    }
+    
+    public static void afficherGraph(BaseDeTweets baseDeTweets) {
+    	baseDeTweets.toGraph();
+    }     
     
     public static void quitter() {
     	System.out.println("au revoir");

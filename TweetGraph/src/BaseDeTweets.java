@@ -10,6 +10,11 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import javafx.scene.control.TableColumn;
@@ -63,8 +68,8 @@ public class BaseDeTweets {
 				collTweets.add(n);
 			}
 		}
-		catch (ArrayIndexOutOfBoundsException ee) {
-			System.out.println("i :"+ii);
+		catch (ArrayIndexOutOfBoundsException ee) { //erreur quand les lignes sont pas bonnes
+			System.out.println("ligne  a supprimer :"+ii+2);
 		}
 		return collTweets;
 	}
@@ -88,5 +93,30 @@ public class BaseDeTweets {
 			}
 		}
 		return s;
-	} 
+	}
+	
+	public void toGraph(){
+    	Graph graph = new SingleGraph("Tutorial 1");
+
+    	Iterator<Tweets> iter=collTweets.iterator();
+    	ArrayList<String> myNumbers = new ArrayList<String>();
+    	Boolean flag=true;
+        while(iter.hasNext())
+        {
+            Tweets n = iter.next();
+            String nom = n.getIdTwitto();
+            for (String i : myNumbers) {
+            	if(nom.compareTo(i)==0) {
+            		flag=false;
+            		break;
+            	}
+            }
+        	if(flag==true) {
+        		graph.addNode(nom);
+        		myNumbers.add(nom);
+        	}
+        }
+
+		graph.display();
+    } 
 }
