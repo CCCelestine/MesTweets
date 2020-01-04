@@ -17,7 +17,7 @@ import javafx.scene.control.TableView;
 
 public class BaseDeTweets {
 	private HashSet<Tweets> collTweets;
-	
+
 	/*public TableView<Tweets> tweetTable = new TableView();
 	final TableColumn<Tweets, Integer> idColumn = new TableColumn<>("ID"); 
 	final TableColumn<Tweets, String> nomColumn = new TableColumn<>("Twitto"); 
@@ -43,43 +43,50 @@ public class BaseDeTweets {
 		} catch (IOException e) {
 			System.out.println("Impossible de lire le fichier");
 		}
-		for (int i = 0; i < lines.size()-1; i++) {//boucle parcourant toutes les lignes du fichier
-			String[] split = lines.get(i).split("	"); //le separateur de notre fichier
-			//essai de faire un tableau avec des obj de type tweets
-			String Id = String.valueOf(split[0]);
-			String twitto = String.valueOf(split[1]);
-			String date = String.valueOf(split[2]);
-			String tweet = String.valueOf(split[3]);
-			String retweet="";
-			if (split.length==5) {//si il y a un rt car ca veit dire qu'on a divisé 5 fois
-				retweet = String.valueOf(split[4]);
+		int ii =0;
+		try {
+			for (int i = 0; i < lines.size()-1; i++) {//boucle parcourant toutes les lignes du fichier
+				String[] split = lines.get(i).split("	"); //le separateur de notre fichier
+				//essai de faire un tableau avec des obj de type tweets
+				String Id = String.valueOf(split[0]);
+				String twitto = String.valueOf(split[1]);
+				String date = String.valueOf(split[2]);
+				String tweet = String.valueOf(split[3]);
+				String retweet="";
+				ii=i;
+				if (split.length==5) {//si il y a un rt car ca veit dire qu'on a divisé 5 fois
+					retweet = String.valueOf(split[4]);
+				}
+				//instanciation de l'objet Tweets
+				Tweets n = new Tweets(Id, twitto, date, tweet, retweet);
+				//ajout du tweet à la collection de tweets
+				collTweets.add(n);
 			}
-			//instanciation de l'objet Tweets
-			Tweets n = new Tweets(Id, twitto, date, tweet, retweet);
-			//ajout du tweet à la collection de tweets
-			collTweets.add(n);
+		}
+		catch (ArrayIndexOutOfBoundsException ee) {
+			System.out.println("i :"+ii);
 		}
 		return collTweets;
 	}
-	
+
 	//méthode pour afficher le contenu de notre base de tweets
-    public String toString()
-    {
-        String s = "";
-        int num = 1;
-        //si la base de tweets est vide on renvoie une erreur
-        if(collTweets == null) {
-        	System.out.println("la base de tweets est vide");        
-        } else {
-        	Iterator<Tweets> iter=collTweets.iterator();
-	        while(iter.hasNext())
-	        {
-	            Tweets n = iter.next();
-	            s += "-- Actualité " + num + " --\n";
-	            s += n.toString();
-	            num++;
-	        }
-        }
-        return s;
-    } 
+	public String toString()
+	{
+		String s = "";
+		int num = 1;
+		//si la base de tweets est vide on renvoie une erreur
+		if(collTweets == null) {
+			System.out.println("la base de tweets est vide");        
+		} else {
+			Iterator<Tweets> iter=collTweets.iterator();
+			while(iter.hasNext())
+			{
+				Tweets n = iter.next();
+				s += "-- Actualité " + num + " --\n";
+				s += n.toString();
+				num++;
+			}
+		}
+		return s;
+	} 
 }
