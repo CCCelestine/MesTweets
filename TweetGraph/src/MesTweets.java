@@ -24,6 +24,7 @@ public class MesTweets {
                     break;
                 case 2:
                 	//System.out.println("afficher");
+                	//C:/Users/Laura/Documents/M1 INFO/Projet JAVA/MesTweets/TweetGraph/climat2.txt
                     afficher(baseDeTweets);
                     break;
                 case 3:

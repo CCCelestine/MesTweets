@@ -1,4 +1,3 @@
-
 // Code : https://openclassrooms.com/fr/courses/26832-apprenez-a-programmer-en-java/5013971-installez-des-outils
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -14,18 +13,18 @@ public class testinterface extends Application {
 		//Ceci afin de pouvoir y positionner les éléments que nous avons fait
 		//Il y a un BorderPane car le conteneur principal de notre IHM
 		//est un BorderPane, nous reparlerons de l'objet Stage
-		public Stage stagePrincipal;
-		public BorderPane conteneurPrincipal;
+		private Stage stagePrincipal;
+		private BorderPane conteneurPrincipal;
 		
 		@Override
 		public void start(Stage primaryStage) {
 			stagePrincipal = primaryStage;
 			//Ca ne vous rappelle pas une JFrame ?
-			stagePrincipal.setTitle("Tweet projet java toussa toussa");
+			stagePrincipal.setTitle("fenettre tweet projet java toussa toussa");
 			
 			//Nous allons utiliser nos fichier FXML dans ces deux méthodes
 			initialisationConteneurPrincipal();
-			//initialisationContenu();
+			initialisationContenu();
 		}
 
 		private void initialisationConteneurPrincipal() {
@@ -47,7 +46,7 @@ public class testinterface extends Application {
 				e.printStackTrace();
 			}
 		}
-		/*
+		
 		private void initialisationContenu() {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(testinterface.class.getResource("/Scene.fxml"));
@@ -61,7 +60,7 @@ public class testinterface extends Application {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}*/
+		}
 		
 
 	public static void main(String[] args) {
