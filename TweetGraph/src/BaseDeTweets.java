@@ -1,8 +1,7 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,14 +13,31 @@ import java.util.Scanner;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class BaseDeTweets {
+import org.jgrapht.*;
+import org.jgrapht.graph.*;
+import org.jgrapht.io.*;
+import org.jgrapht.traverse.*;
+
+import com.mxgraph.layout.*;
+import com.mxgraph.swing.*;
+import org.jgrapht.ext.*;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class BaseDeTweets extends
+JApplet{
 	private HashSet<Tweets> collTweets;
+	
+	private static final long serialVersionUID = 2202072534703043194L;
+
+    private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);
+
+    private JGraphXAdapter<String, DefaultEdge> jgxAdapter;
+    
 
 	/*public TableView<Tweets> tweetTable = new TableView();
 	final TableColumn<Tweets, Integer> idColumn = new TableColumn<>("ID"); 
@@ -39,7 +55,7 @@ public class BaseDeTweets {
 	//On veut renvoyer un objet de type HashSet
 	//test d'importation du fichier
 	//https://openclassrooms.com/fr/courses/4975451-demarrez-votre-projet-avec-java/5005441-travaillez-avec-un-fichier-csv
-	public HashSet lecture(String fichier) {
+	public HashSet<Tweets> lecture(String fichier) {
 		collTweets = new HashSet<Tweets>();
 		Path orderPath = Paths.get(fichier);
 		List<String> lines = null;
@@ -96,52 +112,15 @@ public class BaseDeTweets {
 	}
 
 	public void toGraph(){
-		Graph graph = new SingleGraph("Tutorial 1");
+		
+		testjGraphT applet = new testjGraphT(collTweets);
+        applet.init();
 
-		Iterator<Tweets> iter=collTweets.iterator();
-		ArrayList<String> myNumbers = new ArrayList<String>();
-
-		int sommet=0;
-		while(iter.hasNext())
-		{
-			Boolean flag=true;
-			Boolean flag2=true;
-			Tweets n = iter.next();
-			String nom = n.getIdTwitto();
-			String nomRt = n.getRtid();
-			for (String i : myNumbers) {
-				if(nom.compareTo(i)==0) {
-					flag=false;
-					break;
-				}
-			}
-
-			if(flag==true) { //twitto
-				graph.addNode(nom);
-				myNumbers.add(nom);
-				sommet++;
-			}
-
-			for (String i : myNumbers) {
-				if(nomRt.compareTo(i)==0) { //on rajoute aussi celui qui rt
-					flag2=false;
-					break;
-				}
-			}
-			if (flag2==true ) { //twitto qui rt
-				graph.addNode(nomRt);
-
-				myNumbers.add(nomRt);
-				sommet++;
-				//graph.addEdge(nomRt+"-"+nom, nomRt, nom);
-			}
-			if (n.getRtid()!="") {
-				graph.addEdge(n.getId(), nomRt, nom);
-			}
-		}
-
-		//graph.addEdge("AB", "A", "B");
-		System.out.println("nombre de sommet "+sommet);
-		graph.display();
+        JFrame frame = new JFrame();
+        frame.getContentPane().add(applet);
+        frame.setTitle("Ma premiere visu GraphX");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);  
 	} 
 }

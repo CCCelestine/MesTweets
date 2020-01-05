@@ -1,7 +1,10 @@
-//import java.util.Iterator;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.HashSet;
+import java.awt.Dimension;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+import org.jgrapht.ext.JGraphXAdapter;
+import org.jgrapht.graph.DefaultEdge;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,10 +12,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class MesTweets {
+import javax.swing.*;
+
+public class MesTweets 
+{
 	
     public static void main(String[] args) {
         BaseDeTweets baseDeTweets = new BaseDeTweets();
+        
+
         int nb = 0;
         
         while (nb != 3) {
@@ -65,7 +73,7 @@ public class MesTweets {
     
     public static void afficherGraph(BaseDeTweets baseDeTweets) {
     	baseDeTweets.toGraph();
-    }     
+    }
     
     public static void quitter() {
     	System.out.println("au revoir");
