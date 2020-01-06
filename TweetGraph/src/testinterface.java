@@ -21,7 +21,7 @@ public class testinterface extends Application {
 		public void start(Stage primaryStage) {
 			stagePrincipal = primaryStage;
 			//Ca ne vous rappelle pas une JFrame ?
-			stagePrincipal.setTitle("fenettre tweet projet java toussa toussa");
+			stagePrincipal.setTitle("Projet JAVA - Graphe");
 			
 			//Nous allons utiliser nos fichier FXML dans ces deux méthodes
 			initialisationConteneurPrincipal();

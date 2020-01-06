@@ -6,13 +6,14 @@ import java.util.*;
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultEdge;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
-import javax.swing.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 public class MesTweets 
 {
@@ -49,6 +50,7 @@ public class MesTweets
             }
         }
     }
+     
     
     public static int afficher_menu() {
         Scanner scan = new Scanner(System.in);
@@ -59,7 +61,6 @@ public class MesTweets
         return nb;
     }
     
-
     public static void importer(BaseDeTweets baseDeTweets) {
     	baseDeTweets.initialise();
         Scanner scan = new Scanner(System.in);

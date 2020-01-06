@@ -8,16 +8,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 //classe jouant le rôle de controlleur pour traiter les actions
-public class controlleur {
+public class controlleur extends MesTweets {
 	@FXML
 	private Button bImport; // Object injected by FXMLLoader(fx:id="btnHello")
 	@FXML
 	private Label label1;// Object injected by FXMLLoader(fx:id="title")
-
+	//private Label labelVerif;
 	@FXML
+	
 	private void handleButtonAction(ActionEvent event) { 
-		label1.setText("H e l l o   !");
-		label1.setTextFill(Color.BLUE);
+		BaseDeTweets baseDeTweets = new BaseDeTweets();
+		importer(baseDeTweets);
+		label1.setText("Données importées avec succès");
+		label1.setTextFill(Color.GREEN);
 	}
 
 }
