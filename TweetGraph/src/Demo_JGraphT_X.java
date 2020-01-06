@@ -14,9 +14,7 @@ import java.awt.*;
  * JGraphAdapterDemo.
  *
  */
-public class Demo_JGraphT_X
-    extends
-    JApplet
+public class Demo_JGraphT_X extends JApplet
 {
     private static final long serialVersionUID = 2202072534703043194L;
 

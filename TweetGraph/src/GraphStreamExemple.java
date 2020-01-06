@@ -1,4 +1,4 @@
-import org.graphstream.graph.*;
+/*import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
 
 public class GraphStreamExemple {
@@ -15,5 +15,5 @@ public class GraphStreamExemple {
 
 		graph.display();
 	}
-}
+}*/
 

@@ -1,9 +1,11 @@
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.Label;
+
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 //classe jouant le rôle de controlleur pour traiter les actions
 public class controlleur {
@@ -15,7 +17,7 @@ public class controlleur {
 	@FXML
 	private void handleButtonAction(ActionEvent event) { 
 		label1.setText("H e l l o   !");
-		label1.setForeground(Color.blue);
+		label1.setTextFill(Color.BLUE);
 	}
 
 }

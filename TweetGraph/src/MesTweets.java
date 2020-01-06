@@ -41,6 +41,9 @@ public class MesTweets
                 case 4:
                     quitter();
                     break;
+                case 5:
+                	//sauvegarder comme une image png
+                	
                 default:
                     break;
             }
@@ -73,6 +76,10 @@ public class MesTweets
     
     public static void afficherGraph(BaseDeTweets baseDeTweets) {
     	baseDeTweets.toGraph();
+    }
+    
+    public static void SavePNG(BaseDeTweets baseDeTweets) {
+    	//baseDeTweets.saveImage("test2.png");
     }
     
     public static void quitter() {

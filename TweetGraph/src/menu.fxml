@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur">
    <top>
       <MenuBar prefHeight="40.0" prefWidth="500.0" BorderPane.alignment="CENTER">
         <menus>
@@ -46,11 +46,11 @@
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
          <right>
-            <Label prefHeight="55.0" prefWidth="124.0" text="Hellooo" BorderPane.alignment="CENTER" />
+            <Label fx:id="label1" prefHeight="55.0" prefWidth="124.0" text="Hellooo" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </center>
    <right>
-      <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+      <Button fx:id="bImpoort" mnemonicParsing="false" onAction="#handleButtonAction" text="Button" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

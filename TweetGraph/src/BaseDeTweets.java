@@ -10,9 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import org.graphstream.graph.Graph;
-import org.graphstream.graph.implementations.SingleGraph;
-
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -31,13 +28,13 @@ import java.awt.*;
 public class BaseDeTweets extends
 JApplet{
 	private HashSet<Tweets> collTweets;
-	
+
 	private static final long serialVersionUID = 2202072534703043194L;
 
-    private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);
+	private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);
 
-    private JGraphXAdapter<String, DefaultEdge> jgxAdapter;
-    
+	private JGraphXAdapter<String, DefaultEdge> jgxAdapter;
+
 
 	/*public TableView<Tweets> tweetTable = new TableView();
 	final TableColumn<Tweets, Integer> idColumn = new TableColumn<>("ID"); 
@@ -85,8 +82,10 @@ JApplet{
 			}
 		}
 		catch (ArrayIndexOutOfBoundsException ee) { //erreur quand les lignes sont pas bonnes
-			System.out.println("ligne  a supprimer :"+ii+2);
+			System.out.println("ligne  à supprimer :"+ii+2);
 		}
+		System.out.println("nb de lignes :" +ii);
+		System.out.println("taille HashSet " + collTweets.size());
 		return collTweets;
 	}
 
@@ -112,15 +111,15 @@ JApplet{
 	}
 
 	public void toGraph(){
-		
-		testjGraphT applet = new testjGraphT(collTweets);
-        applet.init();
 
-        JFrame frame = new JFrame();
-        frame.getContentPane().add(applet);
-        frame.setTitle("Ma premiere visu GraphX");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);  
+		testjGraphT applet = new testjGraphT(collTweets);
+		applet.creation();
+		//met le graphe crée dans une fenetre
+		JFrame frame = new JFrame();
+		frame.getContentPane().add(applet);
+		frame.setTitle("Ma premiere visu GraphX");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);  
 	} 
 }
