@@ -6,9 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -88,7 +86,47 @@ JApplet{
 		System.out.println("taille HashSet " + collTweets.size());
 		return collTweets;
 	}
+	public int[]  statistique(HashSet<Tweets> collTweets) {
+		Iterator<Tweets> iter=collTweets.iterator();
+		ArrayList<String> utilisateurs = new ArrayList<String>();
+		int volume=0;
+		while(iter.hasNext())
+		{
+			Boolean flag=true;
+			Boolean flag2=true;
+			Tweets n = iter.next();
+			String nom = n.getIdTwitto();
+			String nomRt = n.getRtid();
+			for (String i : utilisateurs) {
+				if(nom.compareTo(i)==0) {
+					flag=false;
+					break;
+				}
+			}
 
+			for (String i : utilisateurs) {
+				if(nomRt.compareTo(i)!=0) {
+					flag2=false;
+					break;
+				}
+			}
+			if (flag==true) {
+				utilisateurs.add(nom);
+			}
+
+			if (flag2==true) {
+				utilisateurs.add(nomRt);
+			}
+			if (n.getRtid()!="" & (flag2==true | flag==true)) {
+				volume++;				
+			}
+		}
+		int[] res = {utilisateurs.size(),volume};
+		return res;
+	}
+	
+
+	
 	//méthode pour afficher le contenu de notre base de tweets
 	public String toString()
 	{

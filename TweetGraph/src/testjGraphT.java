@@ -151,7 +151,7 @@ public class testjGraphT extends JApplet {
 
 		Iterator<Tweets> iter=collTweets.iterator();
 		ArrayList<String> myNumbers = new ArrayList<String>();
-		int sommet=0;
+		
 		while(iter.hasNext())
 		{
 			Boolean flag=true;

@@ -66,6 +66,7 @@ public class MesTweets
         Scanner scan = new Scanner(System.in);
     	System.out.println("saisir un nom de fichier à lire:");
     	String fichier = scan.nextLine();
+    	//String fichier =textRacine.getText();
     	HashSet<Tweets> test = baseDeTweets.lecture(fichier);
         baseDeTweets.setcollTweets(test);
     }
