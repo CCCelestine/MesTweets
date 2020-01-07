@@ -79,14 +79,13 @@ JApplet{
 				collTweets.add(n);
 			}
 		}
-		catch (ArrayIndexOutOfBoundsException ee) { //erreur quand les lignes sont pas bonnes
+		catch (ArrayIndexOutOfBoundsException ee) { 
+			//Détection des lignes à supprimer dans le fichier de données
 			System.out.println("ligne  à supprimer :"+ii+2);
 		}
-		System.out.println("nb de lignes :" +ii);
-		System.out.println("taille HashSet " + collTweets.size());
 		return collTweets;
 	}
-	public int[]  statistique(HashSet<Tweets> collTweets) {
+	public int[] statistique(HashSet<Tweets> collTweets) {
 		Iterator<Tweets> iter=collTweets.iterator();
 		ArrayList<String> utilisateurs = new ArrayList<String>();
 		int volume=0;
@@ -121,11 +120,10 @@ JApplet{
 				volume++;				
 			}
 		}
+		//ordre, volume
 		int[] res = {utilisateurs.size(),volume};
 		return res;
 	}
-	
-
 	
 	//méthode pour afficher le contenu de notre base de tweets
 	public String toString()
@@ -151,7 +149,7 @@ JApplet{
 	public void toGraph(){
 
 		testjGraphT applet = new testjGraphT(collTweets);
-		applet.creation();
+		applet.init();
 		//met le graphe crée dans une fenetre
 		JFrame frame = new JFrame();
 		frame.getContentPane().add(applet);

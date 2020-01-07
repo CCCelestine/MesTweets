@@ -20,12 +20,8 @@ public class testinterface extends Application {
 		@Override
 		public void start(Stage primaryStage) {
 			stagePrincipal = primaryStage;
-			//Ca ne vous rappelle pas une JFrame ?
 			stagePrincipal.setTitle("Projet JAVA - Graphe");
-			
-			//Nous allons utiliser nos fichier FXML dans ces deux méthodes
 			initialisationConteneurPrincipal();
-			//initialisationContenu();
 		}
 
 		private void initialisationConteneurPrincipal() {
@@ -50,22 +46,6 @@ public class testinterface extends Application {
 				e.printStackTrace();
 			}
 		}
-		/*
-		private void initialisationContenu() {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(testinterface.class.getResource("Scene.fxml"));
-			try {
-				//Nous récupérons notre conteneur qui contiendra les données
-				//Pour rappel, c'est un AnchorPane...
-				AnchorPane conteneurPersonne = (AnchorPane) loader.load();
-				//Qui nous ajoutons à notre conteneur principal
-				//Au centre, puisque'il s'agit d'un BorderPane
-				conteneurPrincipal.setCenter(conteneurPersonne);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		*/
 
 	public static void main(String[] args) {
 		launch(args);

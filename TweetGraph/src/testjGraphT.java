@@ -112,20 +112,19 @@ public class testjGraphT extends JApplet {
 			layout.setMoveCircle(true);
 
 			layout.execute(jgxAdapter.getDefaultParent());
-
-
-
 		}
 	}
 
 
 	public void saveImage(String filename)
 	{
-		ListenableGraph<String, DefaultEdge> jGraphT = new DefaultListenableGraph<>(new DefaultDirectedWeightedGraph<>(DefaultEdge.class));
-		JGraphXAdapter<String, DefaultEdge> graphX = new JGraphXAdapter<String, DefaultEdge>(jGraphT);
-		mxIGraphLayout layout = new mxCircleLayout(graphX);
-		layout.execute(graphX.getDefaultParent());
-		BufferedImage image =  mxCellRenderer.createBufferedImage(graphX, null, 2, Color.WHITE, true, null);
+		ListenableGraph<String, DefaultWeightedEdge> g = new DefaultListenableGraph<>(new DefaultDirectedWeightedGraph<>(DefaultWeightedEdge.class));
+
+		JGraphXAdapter<String, DefaultWeightedEdge> jgxAdapter = new JGraphXAdapter<String, DefaultWeightedEdge>(g);
+
+		mxIGraphLayout layout = new mxCircleLayout(jgxAdapter);
+		layout.execute(jgxAdapter.getDefaultParent());
+		BufferedImage image =  mxCellRenderer.createBufferedImage(jgxAdapter, null, 2, Color.WHITE, true, null);
 		File imgFile = new File(filename);
 		try {
 			ImageIO.write(image, "PNG", imgFile);
@@ -137,10 +136,10 @@ public class testjGraphT extends JApplet {
 
 	public void init()
 	{
-		ListenableGraph<String, DefaultEdge> g = new DefaultListenableGraph<>(new DefaultDirectedWeightedGraph<>(DefaultEdge.class));
+		ListenableGraph<String, DefaultWeightedEdge> g = new DefaultListenableGraph<>(new DefaultDirectedWeightedGraph<>(DefaultWeightedEdge.class));
 
 		// create a visualization using JGraph, via an adapter
-		jgxAdapter = new JGraphXAdapter<>(g);
+		JGraphXAdapter<String, DefaultWeightedEdge> jgxAdapter = new JGraphXAdapter<String, DefaultWeightedEdge>(g);
 
 		setPreferredSize(DEFAULT_SIZE);
 		mxGraphComponent component = new mxGraphComponent(jgxAdapter);
@@ -150,42 +149,33 @@ public class testjGraphT extends JApplet {
 		resize(DEFAULT_SIZE);
 
 		Iterator<Tweets> iter=collTweets.iterator();
-		ArrayList<String> myNumbers = new ArrayList<String>();
-		
+		int sommet=0;
 		while(iter.hasNext())
 		{
-			Boolean flag=true;
-			Boolean flag2=true;
+			//System.out.println(g.vertexSet());
+			//System.out.println(g.edgeSet());
 			Tweets n = iter.next();
 			String nom = n.getIdTwitto();
 			String nomRt = n.getRtid();
-			for (String i : myNumbers) {
-				if(nom.compareTo(i)==0) {
-					flag=false;
-					break;
-				}
-			}
-
-			if(flag==true) { //twitto
+			
+			if(g.containsVertex(nom)==false) {
 				g.addVertex(nom);
-				myNumbers.add(nom);
 				sommet++;
-			}
-
-			for (String i : myNumbers) {
-				if(nomRt.compareTo(i)==0) { //on rajoute aussi celui qui rt
-					flag2=false;
-					break;
+				if(nomRt.length()!=0) {
+					if(g.containsVertex(nomRt)==false) {
+						g.addVertex(nomRt);
+						sommet++;
+						g.addEdge(nom, nomRt);
+						System.out.println(g.getEdge(nom, nomRt));
+						g.setEdgeWeight(nom, nomRt, 1);
+						System.out.println(g.getEdgeWeight(g.getEdge(nom, nomRt)));
+					} else {
+						g.addEdge(nom, nomRt);
+						System.out.println(g.getEdge(nom, nomRt));
+						g.setEdgeWeight(nom, nomRt, g.getEdgeWeight(g.getEdge(nom, nomRt)) +1);
+						System.out.println(g.getEdgeWeight(g.getEdge(nom, nomRt)));
+					}
 				}
-			}
-			if (flag2==true ) { //twitto qui rt
-				g.addVertex(nomRt);
-				myNumbers.add(nomRt);
-				sommet++;
-				//graph.addEdge(nomRt+"-"+nom, nomRt, nom);
-			}
-			if (n.getRtid()!="") {
-				g.addEdge(nomRt, nom);
 			}
 
 			//g.PageRank();
@@ -204,6 +194,7 @@ public class testjGraphT extends JApplet {
 			layout.execute(jgxAdapter.getDefaultParent());
 			// that's all there is to it!...
 		}
+		//System.out.println(g.edgeSet());
 	}
 }
 

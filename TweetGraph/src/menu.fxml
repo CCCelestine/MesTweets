@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MesTweets">
    <top>
       <MenuBar prefHeight="33.0" prefWidth="700.0" BorderPane.alignment="CENTER">
         <menus>
@@ -41,16 +41,16 @@
          <top>
             <BorderPane prefHeight="61.0" prefWidth="700.0" BorderPane.alignment="CENTER">
                <right>
-                  <Button fx:id="bImpoort" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="32.0" prefWidth="164.0" text="Importation" BorderPane.alignment="CENTER" />
+                  <Button fx:id="bImpoort" mnemonicParsing="false" onAction="#importationAction" prefHeight="31.0" prefWidth="118.0" text="Importation" BorderPane.alignment="CENTER" />
                </right>
                <center>
-                  <TextField fx:id="textRacine" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="311.0" BorderPane.alignment="CENTER" />
+                  <TextField fx:id="textRacine" prefHeight="26.0" prefWidth="311.0" BorderPane.alignment="CENTER" />
                </center>
                <left>
-                  <Label text="Fichier de données :" BorderPane.alignment="CENTER" />
+                  <Label fx:id="label2" text="Fichier de données :" BorderPane.alignment="CENTER" />
                </left>
                <bottom>
-                  <Label fx:id="label1" prefHeight="30.0" prefWidth="497.0" text="Pas de données importées" textFill="#9a9595" BorderPane.alignment="CENTER">
+                  <Label fx:id="labelMsg" prefHeight="30.0" prefWidth="497.0" text="Pas de données importées" textFill="#9a9595" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="11.0" />
                      </font>
@@ -71,7 +71,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="34.0" prefWidth="59.0" text="0" textFill="#aca8a8">
+                  <Label fx:id="labelVolume" prefHeight="34.0" prefWidth="59.0" text="0" textFill="#aca8a8">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -81,12 +81,12 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="33.0" prefWidth="79.0" text="0" textFill="#aca8a8">
+                  <Label fx:id="labelOrdre" prefHeight="33.0" prefWidth="79.0" text="0" textFill="#aca8a8">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="34.0" prefWidth="70.0" text="Diamètre :">
+                  <Label fx:id="labelDiametre" prefHeight="34.0" prefWidth="70.0" text="Diamètre :">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -101,7 +101,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="18.0" prefWidth="48.0" text="0" textFill="#aca8a8">
+                  <Label fx:id="labelDegre" prefHeight="18.0" prefWidth="48.0" text="0" textFill="#aca8a8">
                      <font>
                         <Font size="14.0" />
                      </font>
