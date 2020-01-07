@@ -1,27 +1,12 @@
 import java.io.*;
-import java.net.*;
 import java.util.*;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.List;
 
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-
-import org.jgrapht.*;
-import org.jgrapht.graph.*;
-import org.jgrapht.io.*;
-import org.jgrapht.traverse.*;
-
-import com.mxgraph.layout.*;
-import com.mxgraph.swing.*;
-import org.jgrapht.ext.*;
-
 import javax.swing.*;
-import java.awt.*;
 
 public class BaseDeTweets extends
 JApplet{
@@ -29,15 +14,9 @@ JApplet{
 
 	private static final long serialVersionUID = 2202072534703043194L;
 
-	private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);
+	//private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);
 
-	private JGraphXAdapter<String, DefaultEdge> jgxAdapter;
-
-
-	/*public TableView<Tweets> tweetTable = new TableView();
-	final TableColumn<Tweets, Integer> idColumn = new TableColumn<>("ID"); 
-	final TableColumn<Tweets, String> nomColumn = new TableColumn<>("Twitto"); 
-	//TableView.addAll(idColumn, nomColumn);*/
+	//private JGraphXAdapter<String, DefaultEdge> jgxAdapter;
 
 	public void setcollTweets(HashSet<Tweets> collTweets) {
 		this.collTweets = collTweets;
@@ -47,8 +26,6 @@ JApplet{
 		collTweets = new HashSet<Tweets>();
 	}
 
-	//On veut renvoyer un objet de type HashSet
-	//test d'importation du fichier
 	//https://openclassrooms.com/fr/courses/4975451-demarrez-votre-projet-avec-java/5005441-travaillez-avec-un-fichier-csv
 	public HashSet<Tweets> lecture(String fichier) {
 		collTweets = new HashSet<Tweets>();
@@ -63,14 +40,13 @@ JApplet{
 		try {
 			for (int i = 0; i < lines.size()-1; i++) {//boucle parcourant toutes les lignes du fichier
 				String[] split = lines.get(i).split("	"); //le separateur de notre fichier
-				//essai de faire un tableau avec des obj de type tweets
 				String Id = String.valueOf(split[0]);
 				String twitto = String.valueOf(split[1]);
 				String date = String.valueOf(split[2]);
 				String tweet = String.valueOf(split[3]);
 				String retweet="";
 				ii=i;
-				if (split.length==5) {//si il y a un rt car ca veit dire qu'on a divisé 5 fois
+				if (split.length==5) {//dans le cas où le tweet est retweeté
 					retweet = String.valueOf(split[4]);
 				}
 				//instanciation de l'objet Tweets

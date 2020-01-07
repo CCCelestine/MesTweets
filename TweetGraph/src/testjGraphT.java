@@ -149,7 +149,6 @@ public class testjGraphT extends JApplet {
 		resize(DEFAULT_SIZE);
 
 		Iterator<Tweets> iter=collTweets.iterator();
-		int sommet=0;
 		while(iter.hasNext())
 		{
 			//System.out.println(g.vertexSet());
@@ -160,11 +159,9 @@ public class testjGraphT extends JApplet {
 			
 			if(g.containsVertex(nom)==false) {
 				g.addVertex(nom);
-				sommet++;
 				if(nomRt.length()!=0) {
 					if(g.containsVertex(nomRt)==false) {
 						g.addVertex(nomRt);
-						sommet++;
 						g.addEdge(nom, nomRt);
 						System.out.println(g.getEdge(nom, nomRt));
 						g.setEdgeWeight(nom, nomRt, 1);
