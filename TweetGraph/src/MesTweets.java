@@ -17,7 +17,6 @@ import javafx.scene.paint.Color;
 public class MesTweets 
 {
 	public BaseDeTweets baseDeTweets = new BaseDeTweets();
-
 	//Déclaration des variables des objets FXML pour l'interface
 	@FXML
 	public Button buttonImport, buttonOuvrir; 
@@ -82,11 +81,11 @@ public class MesTweets
 		Entry<String, Double> entry3 = greatest.get(2);
 		String label31 = entry3.getKey();
 		Double label32 = entry3.getValue();
-		
+
 		//Affichage du top3 des twittos 
-		labelNun.setText(label11 +" score(x100) : " +Double.toString(Math.round(label12*100)));
-		labelNdeux.setText(label21 +" score(x100) : " +Double.toString(Math.round(label22*100)));;
-		labelNtrois.setText(label31 +" score(x100) : " +Double.toString(Math.round(label32*100)));;
+		labelNun.setText(label11 +" : " +Double.toString(label12));
+		labelNdeux.setText(label21 +" : " +Double.toString(label22));;
+		labelNtrois.setText(label31 +" : " +Double.toString(label32));;
 
 		//Récupération de l'image créée à partir du graph pour l'afficher sur l'interface
 		baseDeTweets.pngGraph();

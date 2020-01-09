@@ -18,15 +18,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-//https://github.com/jgrapht/jgrapht/releases/tag/jgrapht-1.3.0/jgrapht-demo/src/main/java/org/jgrapht/demo
 
 public class Graphs extends JApplet {
 
 	private static final long serialVersionUID = 2202072534703043194L;
 
 	private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);
-
-	//private JGraphXAdapter<String, DefaultEdge> jgxAdapter;
 
 	private static Graph<String, DefaultWeightedEdge> g;
 
@@ -51,8 +48,6 @@ public class Graphs extends JApplet {
 		Iterator<Tweets> iter=collTweets.iterator();
 		while(iter.hasNext())
 		{
-			//System.out.println(g.vertexSet());
-			//System.out.println(g.edgeSet());
 			Tweets n = iter.next();
 			String nom = n.getIdTwitto();
 			String nomRt = n.getRtid();
@@ -68,22 +63,17 @@ public class Graphs extends JApplet {
 						g.addVertex(nomRt);
 						//ajout d'un arc : nom = source et nomRt = cible
 						g.addEdge(nom, nomRt);
-						//System.out.println(g.getEdge(nom, nomRt));
 						//poids fixé à 1
 						g.setEdgeWeight(nom, nomRt, 1);
-						//System.out.println(g.getEdgeWeight(g.getEdge(nom, nomRt)));
 					} else {
 						//test si l'arc existe deja
 						if(g.containsEdge(nom, nomRt)) {
-							//System.out.println(g.getEdge(nom, nomRt));
 							//alors on lui rajoute 1 à son poids
 							g.setEdgeWeight(nom, nomRt, g.getEdgeWeight(g.getEdge(nom, nomRt)) +1);
-							//System.out.println(g.getEdgeWeight(g.getEdge(nom, nomRt)));
 						} else {
 							//sinon on l'ajoute avec un poids de 1
 							g.addEdge(nom, nomRt);
 							g.setEdgeWeight(nom, nomRt, 1);
-							//System.out.println(g.getEdgeWeight());
 						}
 					}
 				}
@@ -102,18 +92,13 @@ public class Graphs extends JApplet {
 		Set<DefaultWeightedEdge> edgeSet = g.edgeSet();
 		//pour chaque arc
 		for (DefaultWeightedEdge e : edgeSet) {
-			//System.out.println("on est dans l'arc : "+e);
-			//System.out.println(inGraph.getEdgeTarget(e));
-			int deg = g.degreeOf(g.getEdgeTarget(e));
-			//System.out.println("deg : "+deg);
+			//int deg = g.degreeOf(g.getEdgeTarget(e));
 			//if(deg>8500) {
 			//recuperation des sommets source
 			String v1 = g.getEdgeSource(e);
-			//String v1 = names[sourceV];
 
 			//et destination
 			String v2 = g.getEdgeTarget(e);
-			//String v2 = names[targetV];
 
 			//ajout des sommets
 			bg.addVertex(v1);
@@ -123,7 +108,6 @@ public class Graphs extends JApplet {
 			double w = g.getEdgeWeight(e);
 			//ajout des arcs
 			DefaultWeightedEdge edge = bg.addEdge(v1, v2);
-			//System.out.println("on est dans l'arc : "+edge);
 			//et des poids
 			bg.setEdgeWeight(edge, w);
 			//}
@@ -154,8 +138,10 @@ public class Graphs extends JApplet {
 
 		//enregistrement dans une image
 		BufferedImage image =  mxCellRenderer.createBufferedImage(jgxAdapter, null, 2, Color.WHITE, true, null);
+		//Affectation à l'objet imgFile le nom en sortie qui sera ImgGraphe
 		File imgFile = new File("ImgGraphe.png");
 		try {
+			//ecriture de l'image au format png
 			ImageIO.write(image, "PNG", imgFile);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -164,8 +150,6 @@ public class Graphs extends JApplet {
 	}
 
 	public double[] statistique() {
-		//System.out.println(inGraph.vertexSet());
-		//System.out.println(inGraph.edgeSet());
 		//ordre = nombre de sommets
 		int ordre = g.vertexSet().size();
 		//volume = nombre d'arcs
@@ -186,11 +170,6 @@ public class Graphs extends JApplet {
 		//on veut le top 3
 		int n = 3;
 		List<Entry<String, Double>> greatest = findGreatest(top, n);
-		/*System.out.println("Top "+n+" entries:");
-	        for (Entry<String, Double> entry : greatest)
-	        {
-	            System.out.println(entry);
-	        }*/
 		return greatest;
 	}
 

@@ -57,15 +57,15 @@ public class Tweets implements Serializable{
 	public void setRtid(String rtid) {
 		this.rtid = rtid;
 	}
-	
+
 	//Fonction créée pour la vérification de l'importation des données
 	public String toString() {     
-        String result =  "Id : " + getId() + "\n";
-        result +=  "Id Twitto : " + getIdTwitto() + "\n";
-        result +=  "date : " + getDate() + "\n";
-        result +=  "texte : " + getTexte() + "\n";
-        result +=  "rtid : " + getRtid() + "\n";
+		String result =  "Id : " + getId() + "\n";
+		result +=  "Id Twitto : " + getIdTwitto() + "\n";
+		result +=  "date : " + getDate() + "\n";
+		result +=  "texte : " + getTexte() + "\n";
+		result +=  "rtid : " + getRtid() + "\n";
 
-        return result;	
-    }
+		return result;	
+	}
 }

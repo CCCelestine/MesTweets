@@ -98,7 +98,6 @@ JApplet{
 	}
 	//Affichage du graphe dans une fenetre
 	public void toGraph(){
-		//applet.showGraph();
 		JFrame frame = new JFrame();
 		//met le graphe crée dans une fenetre
 		frame.getContentPane().add(applet);
@@ -106,7 +105,8 @@ JApplet{
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+
+	//appel à la fonction showGraph()
 	public void pngGraph() {
 		applet.showGraph();
 	}
