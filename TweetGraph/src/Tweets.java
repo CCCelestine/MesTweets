@@ -2,6 +2,7 @@ import java.io.Serializable;
 
 public class Tweets implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	protected String id;
 	protected String idTwitto;
 	protected String date;
@@ -33,7 +34,6 @@ public class Tweets implements Serializable{
 		this.id = id;
 	}
 
-
 	public String getDate() {
 		return date;
 	}
@@ -57,7 +57,8 @@ public class Tweets implements Serializable{
 	public void setRtid(String rtid) {
 		this.rtid = rtid;
 	}
-
+	
+	//Fonction créée pour la vérification de l'importation des données
 	public String toString() {     
         String result =  "Id : " + getId() + "\n";
         result +=  "Id Twitto : " + getIdTwitto() + "\n";

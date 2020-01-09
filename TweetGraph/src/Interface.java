@@ -6,12 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
-public class testinterface extends Application {
+public class Interface extends Application {
 
 	private Stage stagePrincipal;
 	private BorderPane conteneurPrincipal;
 
 	@Override
+	//affichage de l'interface
 	public void start(Stage primaryStage) {
 		stagePrincipal = primaryStage;
 		stagePrincipal.setTitle("Projet JAVA - Graphe");
@@ -21,18 +22,18 @@ public class testinterface extends Application {
 	private void initialisationConteneurPrincipal() {
 		//création chargeur de FXML et association avec le fichier .fxml généré avec SceneBuilder
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(testinterface.class.getResource("/menu.fxml"));		
+		loader.setLocation(Interface.class.getResource("/menu.fxml"));		
 		try {
 			conteneurPrincipal = (BorderPane) loader.load();
 			Scene scene = new Scene(conteneurPrincipal);
-			stagePrincipal.setScene(scene); //affectation  de la scene au stage
-			stagePrincipal.show();//affichage
+			stagePrincipal.setScene(scene); 
+			//affichage
+			stagePrincipal.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
+//	public static void main(String[] args) {
+//		launch(args);
+//	}
 }
