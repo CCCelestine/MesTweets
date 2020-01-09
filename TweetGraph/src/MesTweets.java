@@ -16,7 +16,9 @@ import javafx.scene.paint.Color;
 
 public class MesTweets 
 {
+	//Instanciation de la base de tweets
 	public BaseDeTweets baseDeTweets = new BaseDeTweets();
+
 	//Déclaration des variables des objets FXML pour l'interface
 	@FXML
 	public Button buttonImport, buttonOuvrir; 
@@ -29,12 +31,13 @@ public class MesTweets
 
 	//Importation des données
 	public void importer(BaseDeTweets baseDeTweets) {
-		//initialisation de la base de données
+		//initialisation de la base de tweets
 		baseDeTweets.initialise(); 
-		//lecture du fichier dans un objet HasSet de type Tweets
+		//lecture du fichier dans un objet HashSet de type Tweets
 		HashSet<Tweets> bdd = baseDeTweets.lecture(textRacine.getText());
 		baseDeTweets.setcollTweets(bdd);
 	}
+
 	//Actions du bouton "Importation" effectuées lors du déclenchement du bouton importation
 	public void importationAction(ActionEvent event) { 
 		try {
@@ -42,8 +45,58 @@ public class MesTweets
 			//Affichage dans l'interface d'un message sur la réussite de l'importation
 			labelMsg.setText("Données importées avec succès");			
 			labelMsg.setTextFill(Color.GREEN);
+
+
+			//Après l'importation, on affiche les statistiques dans l'interface 
+			//Récuperation des resulats de la fonction toGraph()
+			double[] stat =baseDeTweets.statistique();
+
+			//affichage sur l'interface des statistiques
+			labelOrdre.setText(Double.toString(stat[0]));
+			labelOrdre.setTextFill(Color.BLACK);
+
+			labelVolume.setText(Double.toString(stat[1]));
+			labelVolume.setTextFill(Color.BLACK);
+
+			labelDiametre.setText(Double.toString(stat[2]));
+			labelDiametre.setTextFill(Color.BLACK);
+			//calcul du degre moyen (arrondi) grace à l'ordre et au volume
+			labelDegre.setText(Double.toString((stat[1]*2)/stat[0]));
+			labelDegre.setTextFill(Color.BLACK);
+
+			//Récupération de valeurs pour le top 3 twittos avec le plus de retweets
+			List<Entry<String, Double>> greatest = baseDeTweets.pageRank();
+			Entry<String, Double> entry1 = greatest.get(0);
+			String label11 = entry1.getKey();
+			Double label12 = entry1.getValue();
+			Entry<String, Double> entry2 = greatest.get(1);
+			String label21 = entry2.getKey();
+			Double label22 = entry2.getValue();
+			Entry<String, Double> entry3 = greatest.get(2);
+			String label31 = entry3.getKey();
+			Double label32 = entry3.getValue();
+
+			//Affichage du top3 des twittos 
+			labelNtrois.setText(label11 +" : " +Double.toString(label12));
+			labelNdeux.setText(label21 +" : " +Double.toString(label22));;
+			labelNun.setText(label31 +" : " +Double.toString(label32));;
+
+			//Récupération de l'image créée à partir du graph pour l'afficher sur l'interface
+			baseDeTweets.pngGraph();
+			//Création d'un objet image null
+			Image image = null;
+			try {
+				//récupération de l'image créée
+				image = new Image(new FileInputStream("ImgGraphe.png"));
+			} catch (FileNotFoundException e) { 
+				//Affichage dans l'interface d'un message d'échec de l'affichage de l'image
+				labelMsg.setTextFill(Color.RED);
+				labelMsg.setText("Image non trouvée");
+			}
+			//Affectation de l'image en png dans l'objet ImageGraph
+			imageGraph.setImage(image);			
 		} catch (java.lang.NullPointerException e) 
-		{	//Affichage dans l'interface d'un message sur l'échec de l'importation (racine mauvaise)
+		{	//Affichage dans l'interface d'un message sur l'échec de l'importation (racine incorrecte)
 			labelMsg.setTextFill(Color.RED);
 			labelMsg.setText("Fichier inexistant - Données non importées");
 
@@ -53,60 +106,13 @@ public class MesTweets
 			labelMsg.setTextFill(Color.RED);
 			labelMsg.setText("Adresse invalide - Vérifier la syntaxe de l'adresse");
 		}
-		//Après l'importation, on affiche les statistiques dans l'interface 
-		//Récuperation des resulats de la fonction toGraph()
-		double[] stat =baseDeTweets.statistique();
 
-		//affichage sur l'interface des statistiques
-		labelOrdre.setText(Double.toString(stat[0]));
-		labelOrdre.setTextFill(Color.BLACK);
-
-		labelVolume.setText(Double.toString(stat[1]));
-		labelVolume.setTextFill(Color.BLACK);
-
-		labelDiametre.setText(Double.toString(stat[2]));
-		labelDiametre.setTextFill(Color.BLACK);
-		//calcul du degre moyen (arrondi) grace à l'ordre et au volume
-		labelDegre.setText(Double.toString(Math.round((stat[1]*2)/stat[0])));
-		labelDegre.setTextFill(Color.BLACK);
-
-		//Récupération de valeurs pour le top 3 twittos avec le plus de retweet
-		List<Entry<String, Double>> greatest = baseDeTweets.pageRank();
-		Entry<String, Double> entry1 = greatest.get(0);
-		String label11 = entry1.getKey();
-		Double label12 = entry1.getValue();
-		Entry<String, Double> entry2 = greatest.get(1);
-		String label21 = entry2.getKey();
-		Double label22 = entry2.getValue();
-		Entry<String, Double> entry3 = greatest.get(2);
-		String label31 = entry3.getKey();
-		Double label32 = entry3.getValue();
-
-		//Affichage du top3 des twittos 
-		labelNun.setText(label11 +" : " +Double.toString(label12));
-		labelNdeux.setText(label21 +" : " +Double.toString(label22));;
-		labelNtrois.setText(label31 +" : " +Double.toString(label32));;
-
-		//Récupération de l'image créée à partir du graph pour l'afficher sur l'interface
-		baseDeTweets.pngGraph();
-		//Création d'un objet image null
-		Image image = null;
-		try {//récupération de l'image créée
-			image = new Image(new FileInputStream("ImgGraphe.png"));
-		} catch (FileNotFoundException e) { 
-			//Affichage dans l'interface d'un message sur l'échec de l'affichage de l'image
-			labelMsg.setTextFill(Color.RED);
-			labelMsg.setText("Image non trouvée");
-		}
-		//Affectation de l'image en png dans l'objet ImageGraph
-		imageGraph.setImage(image);
 	}
 
 	//Action du bouton "ouvrir le graphe" pour ouvrir une fenetre permettant de parcourir le graph
 	public void ouvrirFenetre(ActionEvent event) {
 		//ouverture de la fenetre 
 		baseDeTweets.toGraph();
-
 	}
 
 }

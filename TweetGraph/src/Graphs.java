@@ -18,25 +18,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-
+//héritage de la classe JApplet
 public class Graphs extends JApplet {
 
 	private static final long serialVersionUID = 2202072534703043194L;
-
 	private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);
-
+	
 	private static Graph<String, DefaultWeightedEdge> g;
 
 	//constructeur
 	public Graphs() {
-	}
-
-	public static Graph<String, DefaultWeightedEdge> getG() {
-		return g;
-	}
-
-	public static void setG(Graph<String, DefaultWeightedEdge> g) {
-		Graphs.g = g;
 	}
 
 	//méthode pour construire le graphe
@@ -82,8 +73,8 @@ public class Graphs extends JApplet {
 		return g;
 	}
 
-	//méthode pour afficher le graphe
-	public void showGraph(){
+	//méthode pour construire un Listenable Graph (qui a pour but d'être affiché)
+	public void buildListenableGraph(){
 		//initialisation du Listenable graph
 		ListenableGraph<String, DefaultWeightedEdge> bg = new DefaultListenableGraph<>(new DefaultDirectedWeightedGraph<>(DefaultWeightedEdge.class));
 
@@ -117,7 +108,7 @@ public class Graphs extends JApplet {
 		//https://github.com/jgrapht/jgrapht/releases/tag/jgrapht-1.3.0/jgrapht-demo/src/main/java/org/jgrapht/demo
 		// creation d'une visualisation avec JGRAPH, via un adaptateur
 		JGraphXAdapter<String, DefaultWeightedEdge> jgxAdapter = new JGraphXAdapter<String, DefaultWeightedEdge>(bg);
-
+		
 		setPreferredSize(DEFAULT_SIZE);
 		mxGraphComponent component = new mxGraphComponent(jgxAdapter);
 		component.setConnectable(false);
@@ -135,17 +126,18 @@ public class Graphs extends JApplet {
 		layout.setMoveCircle(true);
 
 		layout.execute(jgxAdapter.getDefaultParent());
-
-		//enregistrement dans une image
-		BufferedImage image =  mxCellRenderer.createBufferedImage(jgxAdapter, null, 2, Color.WHITE, true, null);
+		
 		//Affectation à l'objet imgFile le nom en sortie qui sera ImgGraphe
 		File imgFile = new File("ImgGraphe.png");
 		try {
+			//enregistrement dans une image
+			BufferedImage image =  mxCellRenderer.createBufferedImage(jgxAdapter, null, 2, Color.WHITE, true, null);
 			//ecriture de l'image au format png
 			ImageIO.write(image, "PNG", imgFile);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch(java.lang.IllegalArgumentException e) {
+			//erreur normale, pas d'image
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		} 
 	}
 

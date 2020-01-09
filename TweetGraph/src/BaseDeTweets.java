@@ -9,25 +9,25 @@ import java.util.Map.Entry;
 
 import javax.swing.*;
 
-public class BaseDeTweets extends
-JApplet{
+public class BaseDeTweets {
 	private HashSet<Tweets> collTweets;
-	private static final long serialVersionUID = 2202072534703043194L;
+	//instanciation de l'objet Graphs
 	private Graphs applet = new Graphs();	
 
 	public void setcollTweets(HashSet<Tweets> collTweets) {
 		this.collTweets = collTweets;
 	}
-
+	
+	//initialisation de la collection de Tweets
 	public void initialise() {
 		collTweets = new HashSet<Tweets>();
 	}
-
+	
+	//lecture du fichier
 	public HashSet<Tweets> lecture(String fichier) {
-		collTweets = new HashSet<Tweets>();
 		//récupération du chemin du fichier
 		Path orderPath = Paths.get(fichier);
-		//création de lines permettant de stocker les lignes du fichier
+		//création d'une liste permettant de stocker les lignes du fichier
 		List<String> lines = null;
 		try {
 			//lecture de toutes les lignes du fichier
@@ -35,12 +35,12 @@ JApplet{
 		} catch (IOException e) {
 			System.out.println("Impossible de lire le fichier");
 		}
-		//le compteur ii est utile identifier les lignes a supprimer
+		//le compteur ii est utile pour identifier les lignes en erreur
 		int ii =0;
 		try {
 			//boucle parcourant toutes les lignes du fichier
 			for (int i = 0; i < lines.size()-1; i++) {
-				//Separation de nos ligne en fonction du séparateur de notre fichier ("	")
+				//Découpage de la ligne en fonction du séparateur de notre fichier (tab)
 				String[] split = lines.get(i).split("	"); 
 				ii=i;
 				//On souhaite importer seulement les tweets retweetés
@@ -86,16 +86,19 @@ JApplet{
 		return s;
 	}
 
-	//Recupération des statistiques du graph
+	//Construction du graphe et recupération des statistiques
 	public double[] statistique(){		
 		applet.build(collTweets);
 		double[] stat = applet.statistique();
 		return stat;
-	} 
+	}
+	
+	//calcul des 3 twittos les + retweetés
 	public List<Entry<String, Double>>  pageRank() {
 		List<Entry<String, Double>> greatest = applet.pageRank();
 		return greatest;
 	}
+	
 	//Affichage du graphe dans une fenetre
 	public void toGraph(){
 		JFrame frame = new JFrame();
@@ -108,11 +111,6 @@ JApplet{
 
 	//appel à la fonction showGraph()
 	public void pngGraph() {
-		applet.showGraph();
-	}
-
-	//appel de la fonction PageRank (top twitto)
-	public List<Entry<String, Double>> top() {
-		return applet.pageRank();
+		applet.buildListenableGraph();
 	}
 }

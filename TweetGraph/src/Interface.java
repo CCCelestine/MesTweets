@@ -1,4 +1,4 @@
-// Code : https://openclassrooms.com/fr/courses/26832-apprenez-a-programmer-en-java/5013971-installez-des-outils
+//inspiré du code : https://openclassrooms.com/fr/courses/26832-apprenez-a-programmer-en-java/5013971-installez-des-outils
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class Interface extends Application {
 			conteneurPrincipal = (BorderPane) loader.load();
 			Scene scene = new Scene(conteneurPrincipal);
 			stagePrincipal.setScene(scene); 
-			//affichage
+			//affichage de l'interface
 			stagePrincipal.show();
 		} catch (IOException e) {
 			e.printStackTrace();
