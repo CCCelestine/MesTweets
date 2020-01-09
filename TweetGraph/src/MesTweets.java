@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.Map.Entry;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ import javafx.scene.paint.Color;
 public class MesTweets 
 {
 	public BaseDeTweets baseDeTweets = new BaseDeTweets();
-	
+
 	//Déclaration des variables des objets FXML pour l'interface
 	@FXML
 	public Button buttonImport, buttonOuvrir; 
@@ -69,20 +70,30 @@ public class MesTweets
 		//calcul du degre moyen (arrondi) grace à l'ordre et au volume
 		labelDegre.setText(Double.toString(Math.round((stat[1]*2)/stat[0])));
 		labelDegre.setTextFill(Color.BLACK);
+
+		//Récupération de valeurs pour le top 3 twittos avec le plus de retweet
+		List<Entry<String, Double>> greatest = baseDeTweets.pageRank();
+		Entry<String, Double> entry1 = greatest.get(0);
+		String label11 = entry1.getKey();
+		Double label12 = entry1.getValue();
+		Entry<String, Double> entry2 = greatest.get(1);
+		String label21 = entry2.getKey();
+		Double label22 = entry2.getValue();
+		Entry<String, Double> entry3 = greatest.get(2);
+		String label31 = entry3.getKey();
+		Double label32 = entry3.getValue();
 		
-		//Affichage du top5 des twittos avec le plus de retweet
-		labelNun.setText(Double.toString(stat[2]));
-		labelNdeux.setText(Double.toString(stat[2]));
-		labelNtrois.setText(Double.toString(stat[2]));
-	//	labelNquatre.setText();
-		//labelNcinq.setText();
-		
+		//Affichage du top3 des twittos 
+		labelNun.setText(label11 +" score(x100) : " +Double.toString(Math.round(label12*100)));
+		labelNdeux.setText(label21 +" score(x100) : " +Double.toString(Math.round(label22*100)));;
+		labelNtrois.setText(label31 +" score(x100) : " +Double.toString(Math.round(label32*100)));;
+
 		//Récupération de l'image créée à partir du graph pour l'afficher sur l'interface
+		baseDeTweets.pngGraph();
 		//Création d'un objet image null
 		Image image = null;
-		baseDeTweets.pngGraph();
 		try {//récupération de l'image créée
-			image = new Image(new FileInputStream("ImageGraphe.png"));
+			image = new Image(new FileInputStream("ImgGraphe.png"));
 		} catch (FileNotFoundException e) { 
 			//Affichage dans l'interface d'un message sur l'échec de l'affichage de l'image
 			labelMsg.setTextFill(Color.RED);
@@ -91,10 +102,12 @@ public class MesTweets
 		//Affectation de l'image en png dans l'objet ImageGraph
 		imageGraph.setImage(image);
 	}
-	
+
 	//Action du bouton "ouvrir le graphe" pour ouvrir une fenetre permettant de parcourir le graph
 	public void ouvrirFenetre(ActionEvent event) {
+		//ouverture de la fenetre 
 		baseDeTweets.toGraph();
+
 	}
 
 }

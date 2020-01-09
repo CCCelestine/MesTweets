@@ -154,7 +154,7 @@ public class Graphs extends JApplet {
 
 		//enregistrement dans une image
 		BufferedImage image =  mxCellRenderer.createBufferedImage(jgxAdapter, null, 2, Color.WHITE, true, null);
-		File imgFile = new File("ImageGraph.png");
+		File imgFile = new File("ImgGraphe.png");
 		try {
 			ImageIO.write(image, "PNG", imgFile);
 		} catch (IOException e) {

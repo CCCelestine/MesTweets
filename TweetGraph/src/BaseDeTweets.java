@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.swing.*;
 
@@ -91,11 +92,13 @@ JApplet{
 		double[] stat = applet.statistique();
 		return stat;
 	} 
+	public List<Entry<String, Double>>  pageRank() {
+		List<Entry<String, Double>> greatest = applet.pageRank();
+		return greatest;
+	}
 	//Affichage du graphe dans une fenetre
 	public void toGraph(){
-		//applet.build(collTweets);
 		//applet.showGraph();
-
 		JFrame frame = new JFrame();
 		//met le graphe crée dans une fenetre
 		frame.getContentPane().add(applet);
@@ -103,8 +106,13 @@ JApplet{
 		frame.pack();
 		frame.setVisible(true);
 	}
-	public void pngGraph(){
+	
+	public void pngGraph() {
 		applet.showGraph();
-		
+	}
+
+	//appel de la fonction PageRank (top twitto)
+	public List<Entry<String, Double>> top() {
+		return applet.pageRank();
 	}
 }
